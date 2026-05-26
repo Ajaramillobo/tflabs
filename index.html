@@ -832,27 +832,54 @@ function renderCashFlow(){
 // =============================================
 // CLIENTES
 // =============================================
-var activeClientLine = 'Eventos';
+var selectedClientLines = [];  // empty = ALL (Todos)
 function renderClientes(){
   var lines = Object.keys(DATA.clients);
-  document.getElementById('clientTabs').innerHTML = lines.map(function(l){
-    return '<div class="client-tab'+(l===activeClientLine?' active':'')+'" onclick="selectClientLine(\''+l+'\')">'+l+'</div>';
+  var isAll = selectedClientLines.length===0;
+  var html = '<div class="client-tab'+(isAll?' active':'')+'" onclick="selectClientLine(\'__ALL__\')">Todos</div>';
+  html += lines.map(function(l){
+    var act = !isAll && selectedClientLines.indexOf(l)>=0;
+    return '<div class="client-tab'+(act?' active':'')+'" onclick="selectClientLine(\''+l.replace(/'/g,"\\'")+'\')">'+l+'</div>';
   }).join('');
-  renderClientDetail(activeClientLine);
+  document.getElementById('clientTabs').innerHTML = html;
+  renderClientDetail();
 }
 
 function selectClientLine(line){
-  activeClientLine=line;
-  document.querySelectorAll('.client-tab').forEach(function(t){t.classList.toggle('active',t.textContent===line);});
-  renderClientDetail(line);
+  if(line==='__ALL__'){
+    selectedClientLines=[];
+  } else {
+    var idx=selectedClientLines.indexOf(line);
+    if(idx>=0) selectedClientLines.splice(idx,1);
+    else selectedClientLines.push(line);
+    // if all individually selected, treat as "Todos"
+    if(selectedClientLines.length===Object.keys(DATA.clients).length) selectedClientLines=[];
+  }
+  var isAll=selectedClientLines.length===0;
+  document.querySelectorAll('.client-tab').forEach(function(t){
+    if(t.textContent==='Todos') t.classList.toggle('active',isAll);
+    else t.classList.toggle('active',!isAll && selectedClientLines.indexOf(t.textContent)>=0);
+  });
+  renderClientDetail();
 }
 
-function renderClientDetail(line){
-  var clients = DATA.clients[line];
-  if(!clients)return;
+function renderClientDetail(){
+  var allLines = Object.keys(DATA.clients);
+  var linesToShow = selectedClientLines.length>0 ? selectedClientLines : allLines;
+
+  // merge clients from all selected lines
+  var merged = {};
+  linesToShow.forEach(function(line){
+    var cl = DATA.clients[line];
+    if(!cl)return;
+    Object.entries(cl).forEach(function(e){
+      var key = linesToShow.length>1 ? e[0]+' ('+line+')' : e[0];
+      merged[key] = e[1];
+    });
+  });
 
   destroyChart('chartTopClients');
-  var sorted = Object.entries(clients).map(function(e){return{name:e[0],ytd:sum(e[1])};}).sort(function(a,b){return b.ytd-a.ytd;});
+  var sorted = Object.entries(merged).map(function(e){return{name:e[0],ytd:sum(e[1]),vals:e[1]};}).sort(function(a,b){return b.ytd-a.ytd;});
   var lineTotal = sorted.reduce(function(a,c){return a+c.ytd;},0);
   var topData = viewMode==='pct' ? sorted.map(function(c){return (c.ytd/lineTotal)*100;}) : sorted.map(function(c){return c.ytd;});
   charts.chartTopClients = new Chart(document.getElementById('chartTopClients'),{
@@ -872,18 +899,17 @@ function renderClientDetail(line){
   var tbl='<table><thead><tr><th>Cliente</th>';
   MONTHS.forEach(function(mo){tbl+='<th>'+mo+'</th>';});
   tbl+='<th>YTD</th></tr></thead><tbody>';
-  var ytdTotal = Object.values(clients).reduce(function(a,arr){return a+sum(arr);},0);
+  var ytdTotal = Object.values(merged).reduce(function(a,arr){return a+sum(arr);},0);
   var monthTotals = [];
-  for(var mi=0;mi<N;mi++) monthTotals.push(Object.values(clients).reduce(function(a,arr){return a+arr[mi];},0));
+  for(var mi=0;mi<N;mi++) monthTotals.push(Object.values(merged).reduce(function(a,arr){return a+arr[mi];},0));
 
-  Object.entries(clients).forEach(function(e){
-    var name=e[0],arr=e[1];
-    tbl+='<tr><td>'+name+'</td>';
-    arr.forEach(function(v,i){
+  sorted.forEach(function(c){
+    tbl+='<tr><td>'+c.name+'</td>';
+    c.vals.forEach(function(v,i){
       if(!v) tbl+='<td>--</td>';
       else tbl+='<td>'+FMT(v,monthTotals[i])+'</td>';
     });
-    tbl+='<td><strong>'+FMT(sum(arr),ytdTotal)+'</strong></td></tr>';
+    tbl+='<td><strong>'+FMT(c.ytd,ytdTotal)+'</strong></td></tr>';
   });
   tbl+='<tr class="row-total"><td>TOTAL</td>';
   for(var i=0;i<N;i++){
@@ -1037,4 +1063,4 @@ function parseCashFlow(wb){
 }
 </script>
 </body>
-</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
