@@ -357,7 +357,7 @@ const EUR = v => {
   const neg = v < 0;
   const abs = Math.abs(v);
   const s = abs.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
-  return (neg?'-':'')+'â¬'+s;
+  return (neg?'-':'')+'\u20AC'+s;
 };
 const PCT = v => (v*100).toFixed(1)+'%';
 const sum = arr => arr.reduce((a,b)=>a+b,0);
@@ -465,7 +465,7 @@ function renderResumenCharts(){
         {label:'EBITDA',data:p.ebitda,type:'line',borderColor:COLORS.green,backgroundColor:'transparent',pointBackgroundColor:COLORS.green,borderWidth:2,tension:.3,order:1}
       ]
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:16,font:{size:11}}}},scales:{y:{ticks:{callback:v=>'â¬'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}},x:{grid:{display:false}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:16,font:{size:11}}}},scales:{y:{ticks:{callback:v=>'\u20AC'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}},x:{grid:{display:false}}}}
   });
 
   destroyChart('chartRevDonut');
@@ -486,7 +486,7 @@ function renderResumenCharts(){
   charts.chartCash = new Chart(document.getElementById('chartCash'),{
     type:'line',
     data:{labels:MONTHS,datasets:[{label:'Cash',data:DATA.cashflow.cash_fin,borderColor:COLORS.navy,backgroundColor:'rgba(26,33,51,.06)',fill:true,pointBackgroundColor:COLORS.navy,borderWidth:2,tension:.3,pointRadius:5}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'â¬'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}},x:{grid:{display:false}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'\u20AC'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}},x:{grid:{display:false}}}}
   });
 }
 
@@ -507,7 +507,7 @@ function renderPnL(){
   charts.chartRevStack = new Chart(document.getElementById('chartRevStack'),{
     type:'bar',
     data:{labels:MONTHS,datasets:revCats.map(c=>({label:c.label,data:c.data,backgroundColor:c.color,borderRadius:2}))},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:11}}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:v=>'â¬'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:12,font:{size:11}}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:v=>'\u20AC'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}}}}
   });
 
   destroyChart('chartExpBar');
@@ -517,7 +517,7 @@ function renderPnL(){
   charts.chartExpBar = new Chart(document.getElementById('chartExpBar'),{
     type:'bar',
     data:{labels:expLabels,datasets:[{data:expVals,backgroundColor:COLORS.palette.slice(0,7),borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>'â¬'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}},y:{grid:{display:false}}}}
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>'\u20AC'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}},y:{grid:{display:false}}}}
   });
 
   // P&L Table - ALL detail visible
@@ -656,7 +656,7 @@ function renderCashFlow(){
       {label:'Cash Inicio',data:cf.cash_inicio,borderColor:COLORS.slate,backgroundColor:'transparent',borderDash:[5,3],borderWidth:1.5,tension:.3,pointRadius:3},
       {label:'Cash Fin',data:cf.cash_fin,borderColor:COLORS.blue,backgroundColor:'rgba(37,99,235,.06)',fill:true,borderWidth:2,tension:.3,pointRadius:4}
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:16,font:{size:11}}}},scales:{y:{ticks:{callback:v=>'â¬'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}},x:{grid:{display:false}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,pointStyle:'circle',padding:16,font:{size:11}}}},scales:{y:{ticks:{callback:v=>'\u20AC'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}},x:{grid:{display:false}}}}
   });
 
   destroyChart('chartCfWaterfall');
@@ -677,7 +677,7 @@ function renderCashFlow(){
       {label:'Base',data:bases,backgroundColor:'transparent',borderWidth:0},
       {label:'Valor',data:values,backgroundColor:wVals.map((v,i)=>i===0||i===wLabels.length-1?COLORS.navy:v>=0?COLORS.green:COLORS.red),borderRadius:3}
     ]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.datasetIndex===1?EUR(wVals[ctx.dataIndex]):''}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:v=>'â¬'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}}}}
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.datasetIndex===1?EUR(wVals[ctx.dataIndex]):''}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:v=>'\u20AC'+Math.round(v/1000)+'K'},grid:{color:'#f0f0f0'}}}}
   });
 
   // CF Table
@@ -733,7 +733,7 @@ function renderClientDetail(line){
   charts.chartTopClients = new Chart(document.getElementById('chartTopClients'),{
     type:'bar',
     data:{labels:sorted.map(c=>c.name),datasets:[{data:sorted.map(c=>c.ytd),backgroundColor:COLORS.palette,borderRadius:4}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>'â¬'+v.toLocaleString('es-ES')},grid:{color:'#f0f0f0'}},y:{grid:{display:false}}}}
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:v=>'\u20AC'+v.toLocaleString('es-ES')},grid:{color:'#f0f0f0'}},y:{grid:{display:false}}}}
   });
 
   destroyChart('chartConcentration');
