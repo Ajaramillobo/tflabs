@@ -128,6 +128,22 @@ tr.row-sub-detail td{padding-left:48px;font-size:.78rem;color:var(--gray-400)}
 .toggle-switch input:checked+.toggle-slider{background:var(--green)}
 .toggle-switch input:checked+.toggle-slider::before{transform:translateX(16px)}
 
+
+/* -- DRILLDOWN -- */
+tr.row-clickable{cursor:pointer}
+tr.row-clickable td:first-child{position:relative;padding-left:28px}
+tr.row-clickable td:first-child::before{content:'\25B6';position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.6rem;color:var(--gray-400);transition:transform .2s}
+tr.row-clickable.expanded td:first-child::before{transform:translateY(-50%) rotate(90deg)}
+tr.row-sub-clickable{cursor:pointer}
+tr.row-sub-clickable td:first-child{position:relative}
+tr.row-sub-clickable td:first-child::before{content:'\25B6';position:absolute;left:32px;top:50%;transform:translateY(-50%);font-size:.5rem;color:var(--gray-400);transition:transform .2s}
+tr.row-sub-clickable.expanded td:first-child::before{transform:translateY(-50%) rotate(90deg)}
+tr.row-drilldown td{padding-left:44px!important;font-size:.78rem;color:var(--gray-500);background:#fafbfc}
+tr.row-drilldown:hover td{background:#f0f4ff}
+tr.row-drilldown-tx td{padding-left:60px!important;font-size:.75rem;color:var(--gray-400);background:#f8f9fb;font-style:italic}
+tr.row-drilldown-tx:hover td{background:#eef2ff}
+tr.row-drilldown-tx td:first-child{white-space:normal;min-width:200px}
+
 /* -- RESPONSIVE -- */
 @media(max-width:900px){
   .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);z-index:200}
@@ -362,7 +378,98 @@ const DATA = {
     'RRHH & Admin':[-1714.4,-2643.31,-2658.96,-2972.77],
     'Gestion y Legal':[-1538.5,-2133.5,-2538.5,-2559],
     'Servicios Bancarios':[-6.18,-2.92,-2.84,-12.02]
-  }
+  },
+  drilldown: {
+    eventos: {subs:{'HUAWEI (Sparkoo)':[0,3045.77,0,0],'LIS Data Solutions':[0,0,1225,0],'Idealista Eventos':[916.66,0,916.67,916.67]}},
+    sponsoring: {subs:{'Corporate Sponsoring':[8940,8940.91,8940.91,8344.24],'Proptech Sponsoring':[5625,5625,5625,5625]}},
+    corporate_sponsoring: {subs:{'Intrum':[1940,1940,1940,1940],'Gesvalt':[1400,1400,1400,1470],'ST Cartera':[1666.67,1667.58,1667.58,1667.58],'Caser':[666.67,666.67,666.67,0],'Culmia':[1666.67,1666.67,1666.67,1666.67],'IAD':[1600,1600,1600,1600]}},
+    proptech_sponsoring: {subs:{'GSRAW':[3000,3000,3000,3000],'Muppy':[750,750,750,750],'PhotoiLike':[625,625,625,625],'Snapland':[1250,1250,1250,1250]}},
+    advisory: {subs:{'GSRAW UK/ES':[2613,2613,2613,2613],'Tecnosylva':[0,0,0,21150],'Grupo LAR':[1666.67,0,0,0]}},
+    commissions: {subs:{'GSRAW Comisiones':[0,330,0,0],'Cassandra':[270,0,480,150],'ZZ DATA LAB':[51,51,51,153],'Innovalaus':[4183.14,0,3208.25,0],'Aptki':[0,0,933,0],'IAD Comisiones':[0,500,200,300]}},
+    other_revenue: {subs:{'GSRAW Other Revenue':[839,839,839,845],'Espacio GSRAW':[339,339,339,345],'Servicios Olga':[500,500,500,500],'HANOK':[500,500,500,500]}},
+    cogs: {subs:{'Eventos COGS':[0,-1520,-540,0],'Catering':[0,-800,0,0],'Edicion Videos':[0,-720,-540,0],'Advisory COGS (Henar)':[0,0,0,-5670],'Sponsoring COGS (Pia Viruega)':[0,0,-1400,-1400],'Commissions COGS':[-2060,-1400,-1400,0]}},
+    personal: {subs:{'David Hueso Gutierrez':[-7000,-7000,-7000,-7000],'Alberto Santos Estevez':[-7000,-7000,-7000,-7000],'Sueldos y Salarios':[-2750,-2750,-2750,-2750],'Seguridad Social':[-516.19,-516.19,-516.19,-516.19]}},
+    arrendamientos: {subs:{'COSPACE SL - Espacio':[-1600,-1600,-1600,-1600]}},
+    marketing_ventas: {subs:{'NOVUMPROP (entrada eventos)':[-51.13,0,-2000,0],'Urban Land Institute':[0,0,0,-238.7],'Elastic Email':[0,-1.1,-1.49,-1.55],'Artlist':[0,-71,-218.5,-106.4]}},
+    tech: {subs:{'Google Cloud':[-22.82,-22.82,-22.82,-22.82],'Amazon Web Services':[-62.02,-3.34,-3.34,-3.34],'OpenAI':[-20.38,-14.93,-17.93,-11.74],'Anthropic - Claude':[-48.29,-28.74,-58.91,0],'Bitwarden':[-5,0,-5,0],'DINAHOSTING':[0,-5,0,-4.79]}},
+    rrhh_admin: {subs:{'Dietas y Viajes':[-467.4,-1396.31,-1411.96,-1725.77],'Herramientas RH & Admin':[-1247,-1247,-1247,-1247]}},
+    gestion_legal: {subs:{'Aptki':[-1000,-1000,-1000,-1000],'ROI&CO':[-350,-350,-350,-350],'HOLDED':[-188.5,-188.5,-188.5,-209],'Castaneda Abogados':[0,-595,0,0],'Romero de la Hija':[0,0,-1000,-1000]}},
+    servicios_bancarios: {subs:{'Comisiones Bancarias':[-6.18,-2.92,-2.84,-2.84],'Diferencias Neg. Cambio':[0,0,0,-9.18]}},
+    amortizacion: {subs:{'Amortizacion inmovilizado':[-53.8,-41.94,-44.33,-42.9]}}
+  },
+  facturas: [
+    {fecha:'2026-01-02',num:'A-001',cliente:'Intrum',desc:'Sponsoring Enero',importe:1940},
+    {fecha:'2026-01-02',num:'A-002',cliente:'Gesvalt',desc:'Sponsoring Enero',importe:1400},
+    {fecha:'2026-01-02',num:'A-003',cliente:'ST Cartera',desc:'Sponsoring Enero',importe:1666.67},
+    {fecha:'2026-01-02',num:'A-004',cliente:'Caser',desc:'Sponsoring Enero',importe:666.67},
+    {fecha:'2026-01-02',num:'A-005',cliente:'Culmia',desc:'Sponsoring Enero',importe:1666.67},
+    {fecha:'2026-01-02',num:'A-006',cliente:'IAD',desc:'Sponsoring Enero',importe:1600},
+    {fecha:'2026-01-02',num:'A-007',cliente:'GSRAW',desc:'Proptech Sponsoring Enero',importe:3000},
+    {fecha:'2026-01-02',num:'A-008',cliente:'Muppy',desc:'Proptech Sponsoring Enero',importe:750},
+    {fecha:'2026-01-02',num:'A-009',cliente:'PhotoiLike',desc:'Proptech Sponsoring Enero',importe:625},
+    {fecha:'2026-01-02',num:'A-010',cliente:'Snapland',desc:'Proptech Sponsoring Enero',importe:1250},
+    {fecha:'2026-01-05',num:'A-011',cliente:'Idealista',desc:'Evento Enero',importe:916.66},
+    {fecha:'2026-01-10',num:'A-012',cliente:'GSRAW UK/ES',desc:'Advisory Enero',importe:2613},
+    {fecha:'2026-01-10',num:'A-013',cliente:'Grupo LAR',desc:'Advisory Enero',importe:1666.67},
+    {fecha:'2026-01-15',num:'A-014',cliente:'Innovalaus',desc:'Comision Enero',importe:4183.14},
+    {fecha:'2026-01-15',num:'A-015',cliente:'Cassandra',desc:'Comision Enero',importe:270},
+    {fecha:'2026-01-15',num:'A-016',cliente:'ZZ DATA LAB',desc:'Comision Enero',importe:51},
+    {fecha:'2026-01-20',num:'A-017',cliente:'GSRAW',desc:'Other Revenue Enero',importe:839},
+    {fecha:'2026-01-20',num:'A-018',cliente:'HANOK',desc:'Other Revenue Enero',importe:500},
+    {fecha:'2026-02-01',num:'A-019',cliente:'HUAWEI (Sparkoo)',desc:'Evento Feb',importe:3045.77},
+    {fecha:'2026-02-02',num:'A-020',cliente:'Intrum',desc:'Sponsoring Feb',importe:1940},
+    {fecha:'2026-02-02',num:'A-021',cliente:'Gesvalt',desc:'Sponsoring Feb',importe:1400},
+    {fecha:'2026-02-02',num:'A-022',cliente:'ST Cartera',desc:'Sponsoring Feb',importe:1667.58},
+    {fecha:'2026-02-02',num:'A-023',cliente:'Caser',desc:'Sponsoring Feb',importe:666.67},
+    {fecha:'2026-02-02',num:'A-024',cliente:'Culmia',desc:'Sponsoring Feb',importe:1666.67},
+    {fecha:'2026-02-02',num:'A-025',cliente:'IAD',desc:'Sponsoring Feb',importe:1600},
+    {fecha:'2026-02-02',num:'A-026',cliente:'GSRAW',desc:'Proptech Sponsoring Feb',importe:3000},
+    {fecha:'2026-02-02',num:'A-027',cliente:'Muppy',desc:'Proptech Sponsoring Feb',importe:750},
+    {fecha:'2026-02-02',num:'A-028',cliente:'PhotoiLike',desc:'Proptech Sponsoring Feb',importe:625},
+    {fecha:'2026-02-02',num:'A-029',cliente:'Snapland',desc:'Proptech Sponsoring Feb',importe:1250},
+    {fecha:'2026-02-10',num:'A-030',cliente:'GSRAW UK/ES',desc:'Advisory Feb',importe:2613},
+    {fecha:'2026-02-10',num:'A-031',cliente:'GSRAW Comisiones',desc:'Comision Feb',importe:330},
+    {fecha:'2026-02-15',num:'A-032',cliente:'IAD',desc:'Comision Feb',importe:500},
+    {fecha:'2026-02-20',num:'A-033',cliente:'GSRAW',desc:'Other Revenue Feb',importe:839},
+    {fecha:'2026-02-20',num:'A-034',cliente:'HANOK',desc:'Other Revenue Feb',importe:500},
+    {fecha:'2026-03-01',num:'A-035',cliente:'LIS Data Solutions',desc:'Evento Mar',importe:1225},
+    {fecha:'2026-03-01',num:'A-036',cliente:'Idealista',desc:'Evento Mar',importe:916.67},
+    {fecha:'2026-03-02',num:'A-037',cliente:'Intrum',desc:'Sponsoring Mar',importe:1940},
+    {fecha:'2026-03-02',num:'A-038',cliente:'Gesvalt',desc:'Sponsoring Mar',importe:1400},
+    {fecha:'2026-03-02',num:'A-039',cliente:'ST Cartera',desc:'Sponsoring Mar',importe:1667.58},
+    {fecha:'2026-03-02',num:'A-040',cliente:'Caser',desc:'Sponsoring Mar',importe:666.67},
+    {fecha:'2026-03-02',num:'A-041',cliente:'Culmia',desc:'Sponsoring Mar',importe:1666.67},
+    {fecha:'2026-03-02',num:'A-042',cliente:'IAD',desc:'Sponsoring Mar',importe:1600},
+    {fecha:'2026-03-02',num:'A-043',cliente:'GSRAW',desc:'Proptech Sponsoring Mar',importe:3000},
+    {fecha:'2026-03-02',num:'A-044',cliente:'Muppy',desc:'Proptech Sponsoring Mar',importe:750},
+    {fecha:'2026-03-02',num:'A-045',cliente:'PhotoiLike',desc:'Proptech Sponsoring Mar',importe:625},
+    {fecha:'2026-03-02',num:'A-046',cliente:'Snapland',desc:'Proptech Sponsoring Mar',importe:1250},
+    {fecha:'2026-03-10',num:'A-047',cliente:'GSRAW UK/ES',desc:'Advisory Mar',importe:2613},
+    {fecha:'2026-03-15',num:'A-048',cliente:'Innovalaus',desc:'Comision Mar',importe:3208.25},
+    {fecha:'2026-03-15',num:'A-049',cliente:'Cassandra',desc:'Comision Mar',importe:480},
+    {fecha:'2026-03-15',num:'A-050',cliente:'ZZ DATA LAB',desc:'Comision Mar',importe:51},
+    {fecha:'2026-03-15',num:'A-051',cliente:'Aptki',desc:'Comision Mar',importe:933},
+    {fecha:'2026-03-15',num:'A-052',cliente:'IAD',desc:'Comision Mar',importe:200},
+    {fecha:'2026-03-20',num:'A-053',cliente:'GSRAW',desc:'Other Revenue Mar',importe:839},
+    {fecha:'2026-03-20',num:'A-054',cliente:'HANOK',desc:'Other Revenue Mar',importe:500},
+    {fecha:'2026-04-01',num:'A-055',cliente:'Idealista',desc:'Evento Abr',importe:916.67},
+    {fecha:'2026-04-02',num:'A-056',cliente:'Intrum',desc:'Sponsoring Abr',importe:1940},
+    {fecha:'2026-04-02',num:'A-057',cliente:'Gesvalt',desc:'Sponsoring Abr',importe:1470},
+    {fecha:'2026-04-02',num:'A-058',cliente:'ST Cartera',desc:'Sponsoring Abr',importe:1667.58},
+    {fecha:'2026-04-02',num:'A-059',cliente:'Culmia',desc:'Sponsoring Abr',importe:1666.67},
+    {fecha:'2026-04-02',num:'A-060',cliente:'IAD',desc:'Sponsoring Abr',importe:1600},
+    {fecha:'2026-04-02',num:'A-061',cliente:'GSRAW',desc:'Proptech Sponsoring Abr',importe:3000},
+    {fecha:'2026-04-02',num:'A-062',cliente:'Muppy',desc:'Proptech Sponsoring Abr',importe:750},
+    {fecha:'2026-04-02',num:'A-063',cliente:'PhotoiLike',desc:'Proptech Sponsoring Abr',importe:625},
+    {fecha:'2026-04-02',num:'A-064',cliente:'Snapland',desc:'Proptech Sponsoring Abr',importe:1250},
+    {fecha:'2026-04-10',num:'A-065',cliente:'GSRAW UK/ES',desc:'Advisory Abr',importe:2613},
+    {fecha:'2026-04-10',num:'A-066',cliente:'Tecnosylva',desc:'Advisory Abr',importe:21150},
+    {fecha:'2026-04-15',num:'A-067',cliente:'Cassandra',desc:'Comision Abr',importe:150},
+    {fecha:'2026-04-15',num:'A-068',cliente:'ZZ DATA LAB',desc:'Comision Abr',importe:153},
+    {fecha:'2026-04-15',num:'A-069',cliente:'IAD',desc:'Comision Abr',importe:300},
+    {fecha:'2026-04-20',num:'A-070',cliente:'GSRAW',desc:'Other Revenue Abr',importe:845},
+    {fecha:'2026-04-20',num:'A-071',cliente:'HANOK',desc:'Other Revenue Abr',importe:500}
+  ]
 };
 
 // =============================================
@@ -541,6 +648,8 @@ function renderResumenCharts(){
 // =============================================
 function renderPnL(){
   const p=DATA.pnl;
+  const dd=DATA.drilldown||{};
+  const facs=DATA.facturas||[];
 
   destroyChart('chartRevStack');
   const revCats = [
@@ -571,7 +680,7 @@ function renderPnL(){
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{callback:function(v){return viewMode==='pct'?v.toFixed(0)+'%':'\u20AC'+Math.round(v/1000)+'K';}},grid:{color:'#f0f0f0'}},y:{grid:{display:false}}}}
   });
 
-  // P&L Table
+  // P&L Table with drilldown
   const rows = [
     {key:'company_revenues',label:'Company Revenues',type:'header'},
     {key:'eventos',label:'Eventos',type:'detail'},
@@ -614,7 +723,10 @@ function renderPnL(){
     else if(r.type==='sub-detail')cls='row-sub-detail';
     else if(r.type==='pct')cls='row-detail';
 
-    html+='<tr class="'+cls+'"><td>'+r.label+'</td>';
+    var hasDrill = dd[r.key] && dd[r.key].subs;
+    if(hasDrill) cls+=' row-clickable';
+
+    html+='<tr class="'+cls+'" '+(hasDrill?'data-drill-key="'+r.key+'"':'')+'><td>'+r.label+'</td>';
     if(r.type==='pct'){
       for(var i=0;i<N;i++) html+='<td>'+PCT(d[i])+'</td>';
       var ytdPct = r.key==='pct_ebitda' ? sum(p.ebitda)/sum(p.company_revenues) : sum(p.margen_bruto)/sum(p.company_revenues);
@@ -627,9 +739,76 @@ function renderPnL(){
       html+='<td><strong>'+EUR(sum(d))+'</strong></td>';
     }
     html+='</tr>';
+
+    // Drilldown sub-rows (hidden by default)
+    if(hasDrill){
+      var subs=dd[r.key].subs;
+      Object.keys(subs).forEach(function(subName){
+        var sv=subs[subName];
+        var subId=r.key+'__'+subName.replace(/[^a-zA-Z0-9]/g,'_');
+        html+='<tr class="row-drilldown row-sub-clickable" data-parent="'+r.key+'" data-sub-id="'+subId+'" style="display:none"><td>'+subName+'</td>';
+        if(viewMode==='pct'){
+          for(var i=0;i<N;i++) html+='<td>'+FMT(sv[i],p.company_revenues[i])+'</td>';
+          html+='<td><strong>'+FMT(sum(sv),sum(p.company_revenues))+'</strong></td>';
+        } else {
+          for(var i=0;i<N;i++) html+='<td>'+EUR(sv[i])+'</td>';
+          html+='<td><strong>'+EUR(sum(sv))+'</strong></td>';
+        }
+        html+='</tr>';
+
+        // Level 2: transaction rows for this sub
+        var txs = facs.filter(function(f){
+          return f.cliente===subName || subName.indexOf(f.cliente)>=0 || f.cliente.indexOf(subName.split(' ')[0])>=0;
+        });
+        // Also match by description keywords for expense items
+        if(txs.length===0 && sv[0]<=0){
+          // Skip - expense items don't have matching invoices
+        }
+        txs.forEach(function(tx){
+          var moIdx = parseInt(tx.fecha.split('-')[1])-1;
+          html+='<tr class="row-drilldown-tx" data-sub-parent="'+subId+'" style="display:none">';
+          html+='<td>'+tx.fecha+' | '+tx.num+' - '+tx.desc+'</td>';
+          for(var i=0;i<N;i++){
+            html+='<td>'+(i===moIdx?EUR(tx.importe):'')+'</td>';
+          }
+          html+='<td>'+EUR(tx.importe)+'</td>';
+          html+='</tr>';
+        });
+      });
+    }
   });
   html+='</tbody></table>';
   document.getElementById('pnlTableWrap').innerHTML=html;
+
+  // Attach click handlers for Level 1 (expand subcuentas)
+  document.querySelectorAll('tr[data-drill-key]').forEach(function(tr){
+    tr.addEventListener('click',function(){
+      var key=this.getAttribute('data-drill-key');
+      var isExp=this.classList.toggle('expanded');
+      document.querySelectorAll('tr[data-parent="'+key+'"]').forEach(function(sub){
+        sub.style.display=isExp?'':'none';
+        if(!isExp){
+          sub.classList.remove('expanded');
+          var subId=sub.getAttribute('data-sub-id');
+          document.querySelectorAll('tr[data-sub-parent="'+subId+'"]').forEach(function(tx){
+            tx.style.display='none';
+          });
+        }
+      });
+    });
+  });
+
+  // Attach click handlers for Level 2 (expand transactions)
+  document.querySelectorAll('tr.row-sub-clickable').forEach(function(tr){
+    tr.addEventListener('click',function(e){
+      e.stopPropagation();
+      var subId=this.getAttribute('data-sub-id');
+      var isExp=this.classList.toggle('expanded');
+      document.querySelectorAll('tr[data-sub-parent="'+subId+'"]').forEach(function(tx){
+        tx.style.display=isExp?'':'none';
+      });
+    });
+  });
 }
 
 // =============================================
