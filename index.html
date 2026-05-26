@@ -756,14 +756,10 @@ function renderPnL(){
         }
         html+='</tr>';
 
-        // Level 2: transaction rows for this sub
+        // Level 2: transaction rows for this sub (exact match only)
         var txs = facs.filter(function(f){
-          return f.cliente===subName || subName.indexOf(f.cliente)>=0 || f.cliente.indexOf(subName.split(' ')[0])>=0;
+          return f.cliente===subName;
         });
-        // Also match by description keywords for expense items
-        if(txs.length===0 && sv[0]<=0){
-          // Skip - expense items don't have matching invoices
-        }
         txs.forEach(function(tx){
           var moIdx = parseInt(tx.fecha.split('-')[1])-1;
           html+='<tr class="row-drilldown-tx" data-sub-parent="'+subId+'" style="display:none">';
@@ -1157,4 +1153,4 @@ function parseCashFlow(wb){
 }
 </script>
 </body>
-</html>
+</html>                                                                                                                                                                                                                                              
