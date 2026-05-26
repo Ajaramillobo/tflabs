@@ -134,15 +134,8 @@ tr.row-clickable{cursor:pointer}
 tr.row-clickable td:first-child{position:relative;padding-left:28px}
 tr.row-clickable td:first-child::before{content:'\25B6';position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:.6rem;color:var(--gray-400);transition:transform .2s}
 tr.row-clickable.expanded td:first-child::before{transform:translateY(-50%) rotate(90deg)}
-tr.row-sub-clickable{cursor:pointer}
-tr.row-sub-clickable td:first-child{position:relative}
-tr.row-sub-clickable td:first-child::before{content:'\25B6';position:absolute;left:32px;top:50%;transform:translateY(-50%);font-size:.5rem;color:var(--gray-400);transition:transform .2s}
-tr.row-sub-clickable.expanded td:first-child::before{transform:translateY(-50%) rotate(90deg)}
 tr.row-drilldown td{padding-left:44px!important;font-size:.78rem;color:var(--gray-500);background:#fafbfc}
 tr.row-drilldown:hover td{background:#f0f4ff}
-tr.row-drilldown-tx td{padding-left:60px!important;font-size:.75rem;color:var(--gray-400);background:#f8f9fb;font-style:italic}
-tr.row-drilldown-tx:hover td{background:#eef2ff}
-tr.row-drilldown-tx td:first-child{white-space:normal;min-width:200px}
 
 /* -- RESPONSIVE -- */
 @media(max-width:900px){
@@ -396,80 +389,7 @@ const DATA = {
     gestion_legal: {subs:{'Aptki':[-1000,-1000,-1000,-1000],'ROI&CO':[-350,-350,-350,-350],'HOLDED':[-188.5,-188.5,-188.5,-209],'Castaneda Abogados':[0,-595,0,0],'Romero de la Hija':[0,0,-1000,-1000]}},
     servicios_bancarios: {subs:{'Comisiones Bancarias':[-6.18,-2.92,-2.84,-2.84],'Diferencias Neg. Cambio':[0,0,0,-9.18]}},
     amortizacion: {subs:{'Amortizacion inmovilizado':[-53.8,-41.94,-44.33,-42.9]}}
-  },
-  facturas: [
-    {fecha:'2026-01-02',num:'A-001',cliente:'Intrum',desc:'Sponsoring Enero',importe:1940},
-    {fecha:'2026-01-02',num:'A-002',cliente:'Gesvalt',desc:'Sponsoring Enero',importe:1400},
-    {fecha:'2026-01-02',num:'A-003',cliente:'ST Cartera',desc:'Sponsoring Enero',importe:1666.67},
-    {fecha:'2026-01-02',num:'A-004',cliente:'Caser',desc:'Sponsoring Enero',importe:666.67},
-    {fecha:'2026-01-02',num:'A-005',cliente:'Culmia',desc:'Sponsoring Enero',importe:1666.67},
-    {fecha:'2026-01-02',num:'A-006',cliente:'IAD',desc:'Sponsoring Enero',importe:1600},
-    {fecha:'2026-01-02',num:'A-007',cliente:'GSRAW',desc:'Proptech Sponsoring Enero',importe:3000},
-    {fecha:'2026-01-02',num:'A-008',cliente:'Muppy',desc:'Proptech Sponsoring Enero',importe:750},
-    {fecha:'2026-01-02',num:'A-009',cliente:'PhotoiLike',desc:'Proptech Sponsoring Enero',importe:625},
-    {fecha:'2026-01-02',num:'A-010',cliente:'Snapland',desc:'Proptech Sponsoring Enero',importe:1250},
-    {fecha:'2026-01-05',num:'A-011',cliente:'Idealista',desc:'Evento Enero',importe:916.66},
-    {fecha:'2026-01-10',num:'A-012',cliente:'GSRAW UK/ES',desc:'Advisory Enero',importe:2613},
-    {fecha:'2026-01-10',num:'A-013',cliente:'Grupo LAR',desc:'Advisory Enero',importe:1666.67},
-    {fecha:'2026-01-15',num:'A-014',cliente:'Innovalaus',desc:'Comision Enero',importe:4183.14},
-    {fecha:'2026-01-15',num:'A-015',cliente:'Cassandra',desc:'Comision Enero',importe:270},
-    {fecha:'2026-01-15',num:'A-016',cliente:'ZZ DATA LAB',desc:'Comision Enero',importe:51},
-    {fecha:'2026-01-20',num:'A-017',cliente:'GSRAW',desc:'Other Revenue Enero',importe:839},
-    {fecha:'2026-01-20',num:'A-018',cliente:'HANOK',desc:'Other Revenue Enero',importe:500},
-    {fecha:'2026-02-01',num:'A-019',cliente:'HUAWEI (Sparkoo)',desc:'Evento Feb',importe:3045.77},
-    {fecha:'2026-02-02',num:'A-020',cliente:'Intrum',desc:'Sponsoring Feb',importe:1940},
-    {fecha:'2026-02-02',num:'A-021',cliente:'Gesvalt',desc:'Sponsoring Feb',importe:1400},
-    {fecha:'2026-02-02',num:'A-022',cliente:'ST Cartera',desc:'Sponsoring Feb',importe:1667.58},
-    {fecha:'2026-02-02',num:'A-023',cliente:'Caser',desc:'Sponsoring Feb',importe:666.67},
-    {fecha:'2026-02-02',num:'A-024',cliente:'Culmia',desc:'Sponsoring Feb',importe:1666.67},
-    {fecha:'2026-02-02',num:'A-025',cliente:'IAD',desc:'Sponsoring Feb',importe:1600},
-    {fecha:'2026-02-02',num:'A-026',cliente:'GSRAW',desc:'Proptech Sponsoring Feb',importe:3000},
-    {fecha:'2026-02-02',num:'A-027',cliente:'Muppy',desc:'Proptech Sponsoring Feb',importe:750},
-    {fecha:'2026-02-02',num:'A-028',cliente:'PhotoiLike',desc:'Proptech Sponsoring Feb',importe:625},
-    {fecha:'2026-02-02',num:'A-029',cliente:'Snapland',desc:'Proptech Sponsoring Feb',importe:1250},
-    {fecha:'2026-02-10',num:'A-030',cliente:'GSRAW UK/ES',desc:'Advisory Feb',importe:2613},
-    {fecha:'2026-02-10',num:'A-031',cliente:'GSRAW Comisiones',desc:'Comision Feb',importe:330},
-    {fecha:'2026-02-15',num:'A-032',cliente:'IAD',desc:'Comision Feb',importe:500},
-    {fecha:'2026-02-20',num:'A-033',cliente:'GSRAW',desc:'Other Revenue Feb',importe:839},
-    {fecha:'2026-02-20',num:'A-034',cliente:'HANOK',desc:'Other Revenue Feb',importe:500},
-    {fecha:'2026-03-01',num:'A-035',cliente:'LIS Data Solutions',desc:'Evento Mar',importe:1225},
-    {fecha:'2026-03-01',num:'A-036',cliente:'Idealista',desc:'Evento Mar',importe:916.67},
-    {fecha:'2026-03-02',num:'A-037',cliente:'Intrum',desc:'Sponsoring Mar',importe:1940},
-    {fecha:'2026-03-02',num:'A-038',cliente:'Gesvalt',desc:'Sponsoring Mar',importe:1400},
-    {fecha:'2026-03-02',num:'A-039',cliente:'ST Cartera',desc:'Sponsoring Mar',importe:1667.58},
-    {fecha:'2026-03-02',num:'A-040',cliente:'Caser',desc:'Sponsoring Mar',importe:666.67},
-    {fecha:'2026-03-02',num:'A-041',cliente:'Culmia',desc:'Sponsoring Mar',importe:1666.67},
-    {fecha:'2026-03-02',num:'A-042',cliente:'IAD',desc:'Sponsoring Mar',importe:1600},
-    {fecha:'2026-03-02',num:'A-043',cliente:'GSRAW',desc:'Proptech Sponsoring Mar',importe:3000},
-    {fecha:'2026-03-02',num:'A-044',cliente:'Muppy',desc:'Proptech Sponsoring Mar',importe:750},
-    {fecha:'2026-03-02',num:'A-045',cliente:'PhotoiLike',desc:'Proptech Sponsoring Mar',importe:625},
-    {fecha:'2026-03-02',num:'A-046',cliente:'Snapland',desc:'Proptech Sponsoring Mar',importe:1250},
-    {fecha:'2026-03-10',num:'A-047',cliente:'GSRAW UK/ES',desc:'Advisory Mar',importe:2613},
-    {fecha:'2026-03-15',num:'A-048',cliente:'Innovalaus',desc:'Comision Mar',importe:3208.25},
-    {fecha:'2026-03-15',num:'A-049',cliente:'Cassandra',desc:'Comision Mar',importe:480},
-    {fecha:'2026-03-15',num:'A-050',cliente:'ZZ DATA LAB',desc:'Comision Mar',importe:51},
-    {fecha:'2026-03-15',num:'A-051',cliente:'Aptki',desc:'Comision Mar',importe:933},
-    {fecha:'2026-03-15',num:'A-052',cliente:'IAD',desc:'Comision Mar',importe:200},
-    {fecha:'2026-03-20',num:'A-053',cliente:'GSRAW',desc:'Other Revenue Mar',importe:839},
-    {fecha:'2026-03-20',num:'A-054',cliente:'HANOK',desc:'Other Revenue Mar',importe:500},
-    {fecha:'2026-04-01',num:'A-055',cliente:'Idealista',desc:'Evento Abr',importe:916.67},
-    {fecha:'2026-04-02',num:'A-056',cliente:'Intrum',desc:'Sponsoring Abr',importe:1940},
-    {fecha:'2026-04-02',num:'A-057',cliente:'Gesvalt',desc:'Sponsoring Abr',importe:1470},
-    {fecha:'2026-04-02',num:'A-058',cliente:'ST Cartera',desc:'Sponsoring Abr',importe:1667.58},
-    {fecha:'2026-04-02',num:'A-059',cliente:'Culmia',desc:'Sponsoring Abr',importe:1666.67},
-    {fecha:'2026-04-02',num:'A-060',cliente:'IAD',desc:'Sponsoring Abr',importe:1600},
-    {fecha:'2026-04-02',num:'A-061',cliente:'GSRAW',desc:'Proptech Sponsoring Abr',importe:3000},
-    {fecha:'2026-04-02',num:'A-062',cliente:'Muppy',desc:'Proptech Sponsoring Abr',importe:750},
-    {fecha:'2026-04-02',num:'A-063',cliente:'PhotoiLike',desc:'Proptech Sponsoring Abr',importe:625},
-    {fecha:'2026-04-02',num:'A-064',cliente:'Snapland',desc:'Proptech Sponsoring Abr',importe:1250},
-    {fecha:'2026-04-10',num:'A-065',cliente:'GSRAW UK/ES',desc:'Advisory Abr',importe:2613},
-    {fecha:'2026-04-10',num:'A-066',cliente:'Tecnosylva',desc:'Advisory Abr',importe:21150},
-    {fecha:'2026-04-15',num:'A-067',cliente:'Cassandra',desc:'Comision Abr',importe:150},
-    {fecha:'2026-04-15',num:'A-068',cliente:'ZZ DATA LAB',desc:'Comision Abr',importe:153},
-    {fecha:'2026-04-15',num:'A-069',cliente:'IAD',desc:'Comision Abr',importe:300},
-    {fecha:'2026-04-20',num:'A-070',cliente:'GSRAW',desc:'Other Revenue Abr',importe:845},
-    {fecha:'2026-04-20',num:'A-071',cliente:'HANOK',desc:'Other Revenue Abr',importe:500}
-  ]
+  }
 };
 
 // =============================================
@@ -649,7 +569,6 @@ function renderResumenCharts(){
 function renderPnL(){
   const p=DATA.pnl;
   const dd=DATA.drilldown||{};
-  const facs=DATA.facturas||[];
 
   destroyChart('chartRevStack');
   const revCats = [
@@ -745,8 +664,7 @@ function renderPnL(){
       var subs=dd[r.key].subs;
       Object.keys(subs).forEach(function(subName){
         var sv=subs[subName];
-        var subId=r.key+'__'+subName.replace(/[^a-zA-Z0-9]/g,'_');
-        html+='<tr class="row-drilldown row-sub-clickable" data-parent="'+r.key+'" data-sub-id="'+subId+'" style="display:none"><td>'+subName+'</td>';
+        html+='<tr class="row-drilldown" data-parent="'+r.key+'" style="display:none"><td>'+subName+'</td>';
         if(viewMode==='pct'){
           for(var i=0;i<N;i++) html+='<td>'+FMT(sv[i],p.company_revenues[i])+'</td>';
           html+='<td><strong>'+FMT(sum(sv),sum(p.company_revenues))+'</strong></td>';
@@ -755,21 +673,6 @@ function renderPnL(){
           html+='<td><strong>'+EUR(sum(sv))+'</strong></td>';
         }
         html+='</tr>';
-
-        // Level 2: transaction rows for this sub (exact match only)
-        var txs = facs.filter(function(f){
-          return f.cliente===subName;
-        });
-        txs.forEach(function(tx){
-          var moIdx = parseInt(tx.fecha.split('-')[1])-1;
-          html+='<tr class="row-drilldown-tx" data-sub-parent="'+subId+'" style="display:none">';
-          html+='<td>'+tx.fecha+' | '+tx.num+' - '+tx.desc+'</td>';
-          for(var i=0;i<N;i++){
-            html+='<td>'+(i===moIdx?EUR(tx.importe):'')+'</td>';
-          }
-          html+='<td>'+EUR(tx.importe)+'</td>';
-          html+='</tr>';
-        });
       });
     }
   });
@@ -783,25 +686,6 @@ function renderPnL(){
       var isExp=this.classList.toggle('expanded');
       document.querySelectorAll('tr[data-parent="'+key+'"]').forEach(function(sub){
         sub.style.display=isExp?'':'none';
-        if(!isExp){
-          sub.classList.remove('expanded');
-          var subId=sub.getAttribute('data-sub-id');
-          document.querySelectorAll('tr[data-sub-parent="'+subId+'"]').forEach(function(tx){
-            tx.style.display='none';
-          });
-        }
-      });
-    });
-  });
-
-  // Attach click handlers for Level 2 (expand transactions)
-  document.querySelectorAll('tr.row-sub-clickable').forEach(function(tr){
-    tr.addEventListener('click',function(e){
-      e.stopPropagation();
-      var subId=this.getAttribute('data-sub-id');
-      var isExp=this.classList.toggle('expanded');
-      document.querySelectorAll('tr[data-sub-parent="'+subId+'"]').forEach(function(tx){
-        tx.style.display=isExp?'':'none';
       });
     });
   });
@@ -1153,4 +1037,4 @@ function parseCashFlow(wb){
 }
 </script>
 </body>
-</html>                                                                                                                                                                                                                                              
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
